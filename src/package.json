@@ -1,0 +1,6 @@
+{
+    "name": "slimacy-src",
+    "version": "0.0.0",
+    "description": "a game about a slimy creature",
+    "main": "index.ts"
+}
