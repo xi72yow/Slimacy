@@ -65,7 +65,7 @@ export class Character extends Container {
   }
 
   private setCurrentAnimation(name: string): void {
-    if (this.currentAnimation !== name) {
+    if (name && this.currentAnimation !== name) {
       this.currentAnimation = name;
       this.hero.textures = this.animations.get(name);
       this.hero.play();
@@ -76,22 +76,18 @@ export class Character extends Container {
     this.pressedKeys.add(e.code);
     switch (e.code) {
       case "KeyW":
-        this.setCurrentAnimation("xi72yowslimemoveup");
         this.setVelocityVektor(0, -this.speed);
         break;
 
       case "KeyA":
-        this.setCurrentAnimation("xi72yowslimemoveleft");
         this.setVelocityVektor(-this.speed, 0);
         break;
 
       case "KeyS":
-        this.setCurrentAnimation("xi72yowslimemovedown");
         this.setVelocityVektor(0, this.speed);
         break;
 
       case "KeyD":
-        this.setCurrentAnimation("xi72yowslimemoveright");
         this.setVelocityVektor(this.speed, 0);
         break;
 
@@ -142,8 +138,35 @@ export class Character extends Container {
     return { x, y };
   }
 
+  private getMovementDirection(): string {
+    const x = this.velocityVektor.x;
+    const y = this.velocityVektor.y;
+
+    /*   if (x === 0 && y === 0) {
+      return "xi72yowslimemoveup";
+    } */
+
+    if (x > 0) {
+      return "xi72yowslimemoveright";
+    }
+
+    if (x < 0) {
+      return "xi72yowslimemoveleft";
+    }
+
+    if (y > 0) {
+      return "xi72yowslimemovedown";
+    }
+
+    if (y < 0) {
+      return "xi72yowslimemoveup";
+    }
+  }
+
   private update(deltaTime: number): void {
     const normalizedVelocity = this.velocityNormalization();
+    const movementDirection = this.getMovementDirection();
+    this.setCurrentAnimation(movementDirection);
 
     const xDirection = normalizedVelocity.x;
     const yDirection = normalizedVelocity.y;
