@@ -1,6 +1,8 @@
-import { Application } from "pixi.js";
+import { Application, Loader } from "pixi.js";
 import * as PIXI from "pixi.js";
 import { Character } from "./app/hero/hero";
+/* import { generateGenericAtlas } from "app/utils/utils";
+console.log(generateGenericAtlas(4, 4, 16, 16, "world")); */
 
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
