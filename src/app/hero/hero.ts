@@ -181,39 +181,38 @@ export class Character extends Container {
     const movementDirection = this.getMovementDirection();
     this.setCurrentAnimation(movementDirection);
 
-    let xDirection = normalizedVelocity.x;
-    let yDirection = normalizedVelocity.y;
-    //console.log("🚀 ~", this.collision);
+    const xDirection = normalizedVelocity.x;
+    const yDirection = normalizedVelocity.y;
 
     switch (this.collision) {
       case CollisionTypes.TOP:
-        yDirection = yDirection < 0 ? 0 : yDirection;
+        this.hero.y += this.speed;
         break;
 
       case CollisionTypes.RIGHT:
-        xDirection = xDirection > 0 ? 0 : xDirection;
+        this.hero.x -= this.speed;
         break;
       case CollisionTypes.BOTTOM:
-        yDirection = yDirection > 0 ? 0 : yDirection;
+        this.hero.y -= this.speed;
         break;
       case CollisionTypes.LEFT:
-        xDirection = xDirection < 0 ? 0 : xDirection;
+        this.hero.x += this.speed;
         break;
       case CollisionTypes.TOPLEFT:
-        yDirection = yDirection < 0 ? 0 : yDirection;
-        xDirection = xDirection < 0 ? 0 : xDirection;
+        this.hero.y += this.speed;
+        this.hero.x += this.speed;
         break;
       case CollisionTypes.TOPRIGHT:
-        yDirection = yDirection < 0 ? 0 : yDirection;
-        xDirection = xDirection > 0 ? 0 : xDirection;
+        this.hero.y += this.speed;
+        this.hero.x -= this.speed;
         break;
       case CollisionTypes.BOTTOMLEFT:
-        yDirection = yDirection > 0 ? 0 : yDirection;
-        xDirection = xDirection < 0 ? 0 : xDirection;
+        this.hero.y -= this.speed;
+        this.hero.x += this.speed;
         break;
       case CollisionTypes.BOTTOMRIGHT:
-        yDirection = yDirection > 0 ? 0 : yDirection;
-        xDirection = xDirection > 0 ? 0 : xDirection;
+        this.hero.y -= this.speed;
+        this.hero.x -= this.speed;
         break;
 
       case CollisionTypes.NONE:

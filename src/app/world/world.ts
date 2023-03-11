@@ -40,7 +40,7 @@ export class World extends Container {
 
       const levelSprites = level.map((tile, i) => {
         const piece: Sprite = new Sprite(
-          textures[`world_${tile.src[0]}_${tile.src[1]}.png`]
+          textures[`world_${tile.src[1]}_${tile.src[0]}.png`]
         );
         piece.x = tile.px[0];
         piece.y = tile.px[1];
