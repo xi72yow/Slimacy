@@ -38,6 +38,18 @@ export function generateGenericAtlas(
         },
       };
     }
+    atlas["meta"] = {
+      app: "slimacy-utils",
+      version: "1.0",
+      image: `${textureName}.png`,
+      format: "RGBA8888",
+      size: {
+        w: width * cols,
+        h: height * rows,
+      },
+      scale: "1",
+      smartupdate: "",
+    };
   }
   return atlas;
 }

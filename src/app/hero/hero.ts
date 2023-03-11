@@ -9,6 +9,19 @@ import {
 } from "pixi.js";
 import spritesheetData from "../../assets/hero/hero.json";
 
+export enum CollisionTypes {
+  NONE = 0,
+  TOP = 1,
+  TOPRIGHT = 2,
+  RIGHT = 3,
+  BOTTOMRIGHT = 4,
+  BOTTOM = 5,
+  BOTTOMLEFT = 6,
+  LEFT = 7,
+  TOPLEFT = 8,
+  ALL = 9,
+}
+
 export class Character extends Container {
   private hero: AnimatedSprite;
   private animations = new Map<string, Texture<Resource>[]>();
@@ -16,6 +29,7 @@ export class Character extends Container {
   private velocityVektor = { x: 0, y: 0 };
   private speed = 1;
   private pressedKeys = new Set<string>();
+  private collision = CollisionTypes.NONE;
 
   constructor(screenWidth: number, screenHeight: number) {
     super();
@@ -47,8 +61,6 @@ export class Character extends Container {
       this.addChild(this.hero);
     });
 
-    Ticker.shared.add(this.update, this);
-
     document.addEventListener("keydown", this.onKeyDown.bind(this));
     document.addEventListener("keyup", this.onKeyUp.bind(this));
   }
@@ -56,6 +68,7 @@ export class Character extends Container {
   private setVelocityVektor(xCrement: number, yCrement: number): void {
     const x = this.velocityVektor.x + xCrement;
     const y = this.velocityVektor.y + yCrement;
+
     if (!(x < -this.speed || x > this.speed)) {
       this.velocityVektor.x = x;
     }
@@ -163,15 +176,57 @@ export class Character extends Container {
     }
   }
 
-  private update(deltaTime: number): void {
+  public update(deltaTime: number): void {
     const normalizedVelocity = this.velocityNormalization();
     const movementDirection = this.getMovementDirection();
     this.setCurrentAnimation(movementDirection);
 
-    const xDirection = normalizedVelocity.x;
-    const yDirection = normalizedVelocity.y;
+    let xDirection = normalizedVelocity.x;
+    let yDirection = normalizedVelocity.y;
+    //console.log("🚀 ~", this.collision);
 
+    switch (this.collision) {
+      case CollisionTypes.TOP:
+        yDirection = yDirection < 0 ? 0 : yDirection;
+        break;
+
+      case CollisionTypes.RIGHT:
+        xDirection = xDirection > 0 ? 0 : xDirection;
+        break;
+      case CollisionTypes.BOTTOM:
+        yDirection = yDirection > 0 ? 0 : yDirection;
+        break;
+      case CollisionTypes.LEFT:
+        xDirection = xDirection < 0 ? 0 : xDirection;
+        break;
+      case CollisionTypes.TOPLEFT:
+        yDirection = yDirection < 0 ? 0 : yDirection;
+        xDirection = xDirection < 0 ? 0 : xDirection;
+        break;
+      case CollisionTypes.TOPRIGHT:
+        yDirection = yDirection < 0 ? 0 : yDirection;
+        xDirection = xDirection > 0 ? 0 : xDirection;
+        break;
+      case CollisionTypes.BOTTOMLEFT:
+        yDirection = yDirection > 0 ? 0 : yDirection;
+        xDirection = xDirection < 0 ? 0 : xDirection;
+        break;
+      case CollisionTypes.BOTTOMRIGHT:
+        yDirection = yDirection > 0 ? 0 : yDirection;
+        xDirection = xDirection > 0 ? 0 : xDirection;
+        break;
+
+      case CollisionTypes.NONE:
+        break;
+
+      default:
+        break;
+    }
     this.hero.x = this.hero.x + xDirection * deltaTime;
     this.hero.y = this.hero.y + yDirection * deltaTime;
+  }
+
+  public setCollision(collision: CollisionTypes): void {
+    this.collision = collision;
   }
 }

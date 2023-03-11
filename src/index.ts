@@ -1,8 +1,10 @@
 import { Application, Loader } from "pixi.js";
 import * as PIXI from "pixi.js";
 import { Character } from "./app/hero/hero";
-/* import { generateGenericAtlas } from "app/utils/utils";
-console.log(generateGenericAtlas(4, 4, 16, 16, "world")); */
+import { World } from "./app/world/world";
+
+import { generateGenericAtlas } from "app/utils/utils";
+console.log(generateGenericAtlas(4, 4, 16, 16, "world"));
 
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
@@ -19,6 +21,10 @@ const gameParam = {
 const app = new Application(gameParam);
 
 const character = new Character(gameParam.width, gameParam.height);
+
+const world = new World(character);
+
+app.stage.addChild(world);
 
 app.stage.addChild(character);
 
