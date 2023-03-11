@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/xi72yow/Slimacy/compare/v0.2.0...v0.2.1) (2023-03-11)
+
+
+### Bug Fixes
+
+* **app:** collision response movement not stopping ([2b2df2a](https://github.com/xi72yow/Slimacy/commit/2b2df2a4cf1a98ac43dd6bc209237c23d3174bcb))
+
+
+
+
+
 # [0.2.0](https://github.com/xi72yow/Slimacy/compare/v0.1.1...v0.2.0) (2023-03-11)
 
 
