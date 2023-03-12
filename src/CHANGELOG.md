@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/xi72yow/Slimacy/compare/v0.2.1...v0.3.0) (2023-03-12)
+
+
+### Features
+
+* **app:** react ui, first dev ui ([fbf83fe](https://github.com/xi72yow/Slimacy/commit/fbf83fee876682c605258b9c3753dff1110afc47))
+
+
+
+
+
 ## [0.2.1](https://github.com/xi72yow/Slimacy/compare/v0.2.0...v0.2.1) (2023-03-11)
 
 
