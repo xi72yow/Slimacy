@@ -9,9 +9,9 @@ import {
   TextureSource,
   Ticker,
 } from "pixi.js";
-import ldtkData from "../../assets/world/world.ldtk.json";
+import ldtkData from "assets/world/world.ldtk.json";
 
-import spritesheetData from "../../assets/world/world.json";
+import spritesheetData from "assets/world/world.json";
 import { Character, CollisionTypes } from "app/hero/hero";
 
 export class World extends Container {

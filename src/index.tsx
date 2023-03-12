@@ -1,7 +1,15 @@
 import { Application, Loader } from "pixi.js";
 import * as PIXI from "pixi.js";
-import { Character } from "./app/hero/hero";
-import { World } from "./app/world/world";
+import { Character } from "app/hero/hero";
+import { World } from "app/world/world";
+
+import React from "react";
+import UI from "app/ui/";
+
+import { createRoot } from "react-dom/client";
+const container = document.getElementById("pixi-overlay");
+const root = createRoot(container);
+root.render(<UI />);
 
 import { generateGenericAtlas } from "app/utils/utils";
 console.log(generateGenericAtlas(4, 4, 16, 16, "world"));

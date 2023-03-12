@@ -4,8 +4,10 @@
     "paths": {
       "assets/*": ["src/assets/*"],
       "app/*": ["src/app/*"],
-      "components/*": ["src/app/components/*"],
-      "managers/*": ["src/app/managers/*"]
+      "managers/*": ["src/app/managers/*"],
+      "utils/*": ["src/app/utils/*"],
+      "components/*": ["src/app/ui/components/*"],
+      "ui/*": ["src/app/ui/*"]
     },
     "outDir": "./dist/",
     "sourceMap": true,
@@ -15,6 +17,8 @@
     "moduleResolution": "node",
     "module": "es6",
     "target": "es5",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "esModuleInterop": true,
     "resolveJsonModule": true

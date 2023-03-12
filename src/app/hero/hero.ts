@@ -7,7 +7,9 @@ import {
   TextureSource,
   Ticker,
 } from "pixi.js";
-import spritesheetData from "../../assets/hero/hero.json";
+import spritesheetData from "assets/hero/hero.json";
+
+import { Events } from "app/utils/events";
 
 export enum CollisionTypes {
   NONE = 0,
@@ -27,7 +29,7 @@ export class Character extends Container {
   private animations = new Map<string, Texture<Resource>[]>();
   private currentAnimation: string;
   private velocityVektor = { x: 0, y: 0 };
-  private speed = 1;
+  private speed = 5;
   private pressedKeys = new Set<string>();
   private collision = CollisionTypes.NONE;
 
@@ -63,6 +65,10 @@ export class Character extends Container {
 
     document.addEventListener("keydown", this.onKeyDown.bind(this));
     document.addEventListener("keyup", this.onKeyUp.bind(this));
+
+    document.addEventListener(Events.HERO_SPEED, (e: CustomEvent) => {
+      this.speed = e.detail.value;
+    });
   }
 
   private setVelocityVektor(xCrement: number, yCrement: number): void {
@@ -181,8 +187,8 @@ export class Character extends Container {
     const movementDirection = this.getMovementDirection();
     this.setCurrentAnimation(movementDirection);
 
-    const xDirection = normalizedVelocity.x;
-    const yDirection = normalizedVelocity.y;
+    const xDirection = normalizedVelocity.x * this.speed;
+    const yDirection = normalizedVelocity.y * this.speed;
 
     switch (this.collision) {
       case CollisionTypes.TOP:
